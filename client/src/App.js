@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard.js';
 import Header from './components/Header/Header.js';
 import Login from './components/Login/Login.js';
 import Register from './components/Register/Register.js';
+import AddTask from './components/AddTask/AddTask.js';
 
 const App = () => {
 	
@@ -17,6 +18,7 @@ const App = () => {
 					<Route path="/" element={<Dashboard />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
+					<Route path="/add-task" element={<AddTask />} />
 				</Routes>
 			</Router >
         </>

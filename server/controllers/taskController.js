@@ -1,9 +1,12 @@
+import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 import { pool } from '../db.js'; // Assuming you have already set up the pool in db.js
 
 export const createTask = async (req, res) => {
     try {
-        const {user_id, name, description } = req.body;
+        const decoded = jwt.verify(req.header('authToken'), process.env.JWT_SECRET);
+        const user_id = decoded.user.id;
+        const { name, description } = req.body;
 
         // Generate a unique task_id using uuid
         const taskId = uuidv4();
@@ -26,7 +29,8 @@ export const createTask = async (req, res) => {
 
 export const getTasks = async (req, res) => {
     try {
-        const user_id = req.body.user_id; // Assuming req.user.id contains the ID of the authenticated user
+        const decoded = jwt.verify(req.header('authToken'), process.env.JWT_SECRET);
+        const user_id = decoded.user.id;
 
         // Query to get tasks by user_id
         const getTasksQuery = `
@@ -46,7 +50,8 @@ export const getTasks = async (req, res) => {
 export const editTask = async (req, res) => {
     const task_id = req.params.id;
     const { name, description } = req.body;
-    const user_id = req.body.user_id; // Assuming req.user.id contains the ID of the authenticated user
+    const decoded = jwt.verify(req.header('authToken'), process.env.JWT_SECRET);
+        const user_id = decoded.user.id;
 
     try {
         // Check if the task exists and was created by the authenticated user
@@ -79,7 +84,8 @@ export const editTask = async (req, res) => {
 // DELETE /tasks/:id - Delete a task by ID
 export const deleteTask = async (req, res) => {
     const task_id = req.params.id;
-    const user_id = req.body.user_id; // Assuming req.user.id contains the ID of the authenticated user
+    const decoded = jwt.verify(req.header('authToken'), process.env.JWT_SECRET);
+        const user_id = decoded.user.id;
 
     try {
         // Check if the task exists and was created by the authenticated user

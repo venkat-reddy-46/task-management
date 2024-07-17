@@ -6,7 +6,7 @@ import './Header.css'
 const Header = () => {
   return (
     <header>
-        <div class="container">
+        <div className="container">
             <h1>Task Management</h1>
             <nav>
                 <ul>
