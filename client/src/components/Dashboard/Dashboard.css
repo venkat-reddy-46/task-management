@@ -35,3 +35,18 @@
 .task p {
     color: #666;
 }
+
+.btn{
+    width: 100px;
+    margin: 10px;
+}
+
+.task-desc {
+    white-space: pre-wrap; /* Ensures that long text wraps properly */
+}
+
+.description-textarea {
+    width: 100%;
+    height: 100px; /* Adjust height as needed */
+    resize: vertical; /* Allows vertical resizing */
+}
